@@ -1,0 +1,7 @@
+
+{
+  "id": "wk-contentful-longform-layout",
+  "name": "Longform layout style",
+  "srcdoc": "./app.html",
+  "fieldTypes": ["Symbol"]
+}

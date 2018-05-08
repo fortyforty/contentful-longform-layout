@@ -1,0 +1,7 @@
+{
+  "name": "wk-contentful-layout",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Antoine Girard <thetoine@gmail.com>",
+  "license": "MIT"
+}

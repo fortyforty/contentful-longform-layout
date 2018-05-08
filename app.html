@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Rating Dropdown Widget</title>
+    <!--
+    Include styles from the Contentful app.
+
+    See http://contentful.github.io/ui-extensions-sdk/styleguide for information on
+    how to include and apply these styles.
+     -->
+    <link rel="stylesheet" href="https://contentful.github.io/ui-extensions-sdk/cf-extension.css">
+    <style>
+
+      body { margin: 0; }
+
+      .layout-selection {
+        padding: 10px 0;
+      }
+
+      .layout-selection label {
+        /* width: 120px; */
+        display: inline-block;
+        margin-right: 40px;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+
+      .layout-selection label.is-active {
+        opacity: 1;
+      }
+
+      .layout-selection label input[type='radio'] {
+        display: none;
+      }
+
+      .layout-selection img {
+        max-width: 100%;
+        height: 120px;
+        width: auto;
+      }
+
+    </style>
+
+    <!--
+    Load the Extensions API that is used to communicate with the containing app.
+    -->
+    <script src="https://contentful.github.io/ui-extensions-sdk/cf-extension-api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  </head>
+  <body>
+
+    <div class="layout-selection">
+      <label data-value="top">
+        <input type="radio" name="layout" value="top">
+        <img src="./layout-top.png" alt="top" width="100">
+      </label>
+      <label data-value="bottom">
+          <input type="radio" name="layout" value="bottom">
+          <img src="./layout-bottom.png" alt="bottom">
+        </label>
+      <label data-value="left">
+        <input type="radio" name="layout" value="left">
+        <img src="./layout-left.png" alt="left">
+      </label>
+      <label data-value="right">
+          <input type="radio" name="layout" value="right">
+          <img src="./layout-right.png" alt="top">
+      </label>
+    </div>
+    <p>
+      Current Value: <span id="current-layout"></span>
+    </p>
+
+    <script>
+
+      // This is the main entry point for extensions.
+      //
+      // The extension API reference explains in detail what you can do with
+      // the 'api' object.
+      var cfExt = window.contentfulExtension || window.contentfulWidget
+      cfExt.init(function (api) {
+
+        // Whenever the size of this document changes we adjust the size of
+        // the IFrame in the Contentful App.
+        api.window.startAutoResizer()
+
+        var metaData = api.entry.getSys()
+        var field = api.field;
+
+        // console.log(metaData, field);
+
+        setInitial(field.getValue())
+
+        function setInitial(value) {
+          let $current = $('label').filter('[data-value="' + value +'"]');
+          if ($current.get(0)) {
+            $current.addClass('is-active');
+            $('#current-layout').html(value);
+          }
+        }
+
+        // When the user selects a different option from the dropdown we
+        // update the entry field
+        $('input:radio').on('change', function () {
+          // console.log(this.value);
+          field.setValue(this.value);
+          $(this).parent().addClass('is-active');
+          $(this).parent().siblings().removeClass('is-active');
+          $('#current-layout').html(this.value)
+        })
+
+      })
+
+    </script>
+  </body>
+</html>
