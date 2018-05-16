@@ -19,24 +19,48 @@
       }
 
       .layout-selection label {
-        display: inline-block;
+        display: block;
         margin-right: 20px;
+        margin-bottom: 20px;
         cursor: pointer;
-        opacity: 0.5;
+        float: left;
+        width: 140px;
       }
 
-      .layout-selection label.is-active {
-        opacity: 1;
-      }
 
       .layout-selection label input[type='radio'] {
         display: none;
       }
 
+      .layout-selection figure {
+        margin: 0;
+        padding: 0;
+        width: 140px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        opacity: 0.25;
+        border: 1px solid rgb(105, 105, 105);
+      }
+
       .layout-selection img {
-        max-width: 100%;
-        height: 120px;
-        width: auto;
+        height: auto;
+        width: 80px;
+      }
+
+      .layout-selection label.is-active figure {
+        opacity: 1;
+      }
+
+      hr {
+        clear: both;
+        margin-top: 15px;
+      }
+      p {
+        clear: both;
+        margin-top: 15px;
       }
 
     </style>
@@ -53,38 +77,58 @@
       <label data-value="a">
         <input type="radio" name="layout" value="a">
         a) media on top
-        <!-- <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/dc8589f1/layout-top.png" alt="top" width="100"> -->
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-a.png" alt="top">
+        </figure>
       </label>
       <label data-value="b">
         <input type="radio" name="layout" value="b">
         b) media at bottom
-        <!-- <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/dc8589f1/layout-bottom.png" alt="bottom"> -->
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-b.png" alt="top">
+        </figure>
         </label>
       <label data-value="c">
         <input type="radio" name="layout" value="c">
         c) media on left side
-        <!-- <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/dc8589f1/layout-left.png" alt="left"> -->
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-c.png" alt="top">
+        </figure>
       </label>
       <label data-value="d">
         <input type="radio" name="layout" value="d">
         d) media on right side
-        <!-- <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/dc8589f1/layout-right.png" alt="top"> -->
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-d.png" alt="top">
+        </figure>
       </label>
       <label data-value="e">
         <input type="radio" name="layout" value="e">
         e) pulled content left side
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-d.png" alt="top">
+        </figure>
       </label>
       <label data-value="f">
         <input type="radio" name="layout" value="f">
         f) pulled content right side
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-d.png" alt="top">
+        </figure>
       </label>
       <label data-value="g">
         <input type="radio" name="layout" value="g">
         g) split text columns
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-g.png" alt="top">
+        </figure>
       </label>
       <label data-value="h">
         <input type="radio" name="layout" value="h">
         h) image grid gallery on top
+        <figure>
+          <img src="https://cdn.rawgit.com/fortyforty/contentful-longform-layout/4ebc918f/layout-h.png" alt="top">
+        </figure>
       </label>
     </div>
     <p>
