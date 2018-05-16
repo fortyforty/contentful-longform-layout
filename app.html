@@ -158,9 +158,6 @@
         </figcaption>
       </label>
     </div>
-    <p style="display: none;">
-      Current Value: <span id="current-layout"></span>
-    </p>
 
     <script>
 
@@ -178,10 +175,21 @@
         var metaData = api.entry.getSys()
         var field = api.field;
 
-        // console.log(metaData, field);
+        // layout related fields
+        var title = api.entry.fields.title;
+        var content = api.entry.fields.content;
+        var darkBackground = api.entry.fields.darkBackground;
+        var embededContent = api.entry.fields.embededContent;
+        var fullWidthImagesContainer = api.entry.fields.fullWidthImagesContainer;
+        var images = api.entry.fields.images;
+        var narrowTextColumn = api.entry.fields.narrowTextColumn;
+        var rowDescription = api.entry.fields.rowDescription;
 
+        // gather all fields in an array
+        var allFields = [title, content, darkBackground, embededContent, fullWidthImagesContainer, images, narrowTextColumn, rowDescription];
+
+        // set initial value on field
         setInitial(field.getValue())
-
         function setInitial(value) {
           let $current = $('label').filter('[data-value="' + value +'"]');
           if ($current.get(0)) {
@@ -190,15 +198,80 @@
           }
         }
 
-        // When the user selects a different option from the dropdown we
-        // update the entry field
+        // When the user selects a different option from the dropdown
+        // we update the entry field
         $('input:radio').on('change', function () {
-          // console.log(this.value);
           field.setValue(this.value);
           $(this).parent().addClass('is-active');
           $(this).parent().siblings().removeClass('is-active');
-          $('#current-layout').html(this.value)
+          buildLayoutSelectionString();
         })
+
+        //
+        function buildLayoutSelectionString() {
+          // get all type of layouts fields
+          var layoutValue = field.getValue();
+          var titleValue = title.getValue();
+          var contentValue = content.getValue();
+          var fullWidthImagesContainerValue = fullWidthImagesContainer.getValue();
+          var darkBackgroundValue = darkBackground.getValue();
+          var embededContentValue = embededContent.getValue();
+          var imagesValue = images.getValue();
+          var narrowTextColumnValue = narrowTextColumn.getValue();
+
+          // string holder
+          var string = [];
+
+          // push layout
+          string.push("Layout (" + layoutValue + ")");
+
+          if (titleValue) {
+            string.push("Title : " + titleValue.substring(0, 15) + "...")
+          }
+
+          if (contentValue) {
+            string.push("✔ Content");
+          }
+
+          if (darkBackgroundValue) {
+            string.push("✔ Dark background");
+          }
+
+          if (embededContentValue) {
+            string.push("✔ Embed");
+          }
+
+          if (imagesValue) {
+            string.push(imagesValue.length + " image(s)");
+          }
+
+          if (fullWidthImagesContainerValue) {
+            string.push("✔ Full width image(s) container");
+          }
+
+          if (narrowTextColumnValue) {
+            string.push("✔ Narrow text");
+          }
+
+          // let api.entry.fields
+          rowDescription.setValue(string.join(" - "));
+        }
+
+        // trigger update
+        $(allFields).each(function(index, f) {
+          console.log(f);
+
+          f.onValueChanged(function() {
+            buildLayoutSelectionString();
+          })
+        })
+
+        // api.entry.fields.map((f, index) => {
+        //   console.log(f, index);
+        //   f.onValueChanged(function() {
+        //     buildLayoutSelectionString()
+        //   })
+        // });
 
       })
 

@@ -1,7 +1,7 @@
 {
   "name": "contentful-longform-layout",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "Antoine Girard <thetoine@gmail.com>",
+  "main": "app.html",
+  "author": "Antoine Girard <thetoine@mill3.studio>",
   "license": "MIT"
 }
